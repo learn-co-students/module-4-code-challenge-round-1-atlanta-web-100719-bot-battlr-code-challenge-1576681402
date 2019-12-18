@@ -19,16 +19,14 @@ class BotsPage extends React.Component {
 
   handleAddClick = (id) => {
     const botId = id
-    console.log(botId)
-
+    
     let selectedBot = this.state.botData
     let foundBot = selectedBot.find(element => element.id === botId)
-    console.log(foundBot)
 
     let armyArray = this.state.botArmy
     armyArray.push(foundBot)
     this.setState({botArmy: armyArray})
-    console.log(this.state.botArmy)
+    
   }
 
   render() {
