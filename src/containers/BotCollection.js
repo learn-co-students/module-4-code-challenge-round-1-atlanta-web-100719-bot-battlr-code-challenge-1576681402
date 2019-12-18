@@ -1,19 +1,34 @@
 import React from "react";
 import BotCard from "../components/BotCard";
+import Filter from "../components/Filter";
 
 class BotCollection extends React.Component {
-  //your code here
+	state = {
 
-  render(){
-  	return (
-  	  <div className="ui four column grid">
-    		<div className="row">
-    		  {/*...and here..*/}
-    		  Collection of all bots
-    		</div>
-  	  </div>
-  	);
-  }
+		filter: 'All'
+	}
+
+	handleChange = (e) => {
+		this.setState({ filter: e.target.value })
+	}
+
+	render() {
+		const { botsList, handleClick } = this.props
+		return (
+			<div className="ui four column grid">
+				<Filter handleChange={this.handleChange} />
+				<div className="row">
+					{botsList.map(bot => {
+						if (this.state.filter === 'All') {
+							return <BotCard bot={bot} handleClick={handleClick} key={bot.id} />
+						} else if (bot.bot_class === this.state.filter)
+							return <BotCard bot={bot} handleClick={handleClick} key={bot.id} />
+					})}
+
+				</div>
+			</div>
+		);
+	}
 
 };
 
